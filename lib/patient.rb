@@ -22,7 +22,8 @@ class Patient
   end
 
   def save
-    DB.exec("INSERT INTO patients (name, id_doctor, birthdate) VALUES ('#{@name}', '#{@id_doctor}', '#{@birthdate};')")
+    DB.exec("INSERT INTO patients (name, id_doctor, birthdate, id) VALUES ('#{@name}', '#{@id_doctor}', '#{@birthdate}','#{@id}';)")
+    @id = result.first().fetch("id").to_i()
   end
 
   def self.sort

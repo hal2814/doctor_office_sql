@@ -19,7 +19,7 @@ class Specialty
 
   def save
     result = DB.exec("INSERT INTO specialties (special,id) VALUES ('#{@special}','#{@id}') RETURNING id;")
-    # @id = result.first().fetch("id").to_i()
+    @id = result.first().fetch("id").to_i()
   end
 
 

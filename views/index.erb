@@ -5,19 +5,19 @@
 
   <ul>
     <% @specialty.each() do |s| %>
-      <li><a href="/<%= s.id()%>"><%= s.name() %></a> </li>
+      <li><a href="/<%= s.id()%>"><%= s.special() %></a> </li>
+
     <% end %>
   </ul>
 
 <% else %>
 
-    <p>There are no lists yet!</p>
+    <p>There are no specialties!</p>
 
 <% end %>
 
-<h3>Add a task to <%= @specialty.name() %> </h3>
-
 <form action="/" method="post">
-  <input id="special" name="special" type="hidden" value="<%= @specialty.id() %>">
+  <label for="spec_name">Specialty</label>
+  <input id="spec_name" name="spec_name" type="text">
   <button type="submit">Add specialty</button>
 </form>

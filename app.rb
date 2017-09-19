@@ -1,7 +1,8 @@
 require('sinatra')
 require('sinatra/reloader')
-require('./lib/task')
-require('./lib/list')
+require('./lib/patient')
+require('./lib/doctor')
+require('./lib/specialty')
 also_reload('lib/**/*.rb')
 require("pg")
 
@@ -10,7 +11,7 @@ DB = PG.connect({:dbname => "doctor_office_test"})
 
 get("/") do
   @specialty = Specialty.all()
-  erb(:/)
+  erb(:index)
 end
 
 # get('/specialty') do
@@ -20,14 +21,19 @@ end
 # end
 
 post("/") do
-  special = params.fetch("special")
+  special = params.fetch("spec_name")
   specialty = Specialty.new({:special => special, :id => nil})
   specialty.save()
+  erb(:index)
+end
+
+post("/:id") do
+  @spec= Specialty.find(params.fetch("id").to_i())
   erb(:/)
 end
 
 get("/specialty/:id") do
-  
+
   @doctor = Doctor.find(params.fetch("id").to_i())
   erb(:/)
 end
