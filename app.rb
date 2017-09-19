@@ -5,40 +5,39 @@ require('./lib/list')
 also_reload('lib/**/*.rb')
 require("pg")
 
-# DB = PG.connect({:dbname => "to_do"})
-DB = PG.connect({:dbname => "to_do_test"})
+DB = PG.connect({:dbname => "doctor_office_test"})
 
 
 get("/") do
-  erb(:index)
+  @specialty = Specialty.all()
+  erb(:/)
 end
 
-get("/lists/new") do
-  erb(:list_form)
+# get('/specialty') do
+#   #to view specialty on page
+#   @specialty = Specialty.all()
+#   erb(:/)
+# end
+
+post("/") do
+  special = params.fetch("special")
+  specialty = Specialty.new({:special => special, :id => nil})
+  specialty.save()
+  erb(:/)
 end
 
-post("/lists") do
+get("/specialty/:id") do
+  
+  @doctor = Doctor.find(params.fetch("id").to_i())
+  erb(:/)
+end
+
+post("/doctor/:id") do
   name = params.fetch("name")
-  list = List.new({:name => name, :id => nil})
-  list.save()
-  erb(:success)
- end
-
-get('/lists') do
-  @lists = List.all()
-  erb(:lists)
-end
-
-get("/lists/:id") do
-  @list = List.find(params.fetch("id").to_i())
-  erb(:list)
-end
-
-post("/tasks") do
-  description = params.fetch("description")
-  list_id = params.fetch("list_id").to_i()
-  @list = List.find(list_id)
-  @task = Task.new({:description => description, :list_id => list_id})
-  @task.save()
-  erb(:success)
+  birthdate = params.fetch("birthdate")
+  id_doctor = params.fetch("id_doctor").to_i()
+  @doctor = Doctor.find(id_doctor)
+  @patient = Patient.new({:name => name,:birthdate => birthdate, :id_doctor => id_doctor})
+  @patient.save()
+  erb(:doctor)
 end

@@ -14,14 +14,14 @@ describe(Patient) do
 
   describe("#name") do
     it("tells you its name") do
-      patient = Patient.new({:id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
+      patient = Patient.new({:id => 1, :id => 1, :id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
       expect(patient.name()).to(eq("Patient 0"))
     end
   end
 
   describe("#id_doctor") do
     it("sets its ID when you save it") do
-      patient = Patient.new({:id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
+      patient = Patient.new({:id => 1, :id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
       patient.save()
       expect(patient.id_doctor()).to(be_an_instance_of(Fixnum))
     end
@@ -29,7 +29,7 @@ describe(Patient) do
 
   describe("#birthdate") do
     it("sets its birthdate when you save it") do
-      patient = Patient.new({:id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
+      patient = Patient.new({:id => 1, :id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
       patient.save()
       expect(patient.birthdate()).to(eq("1890-09-03"))
     end
@@ -37,7 +37,7 @@ describe(Patient) do
 
   describe("#save") do
     it("lets you save patients to the database") do
-      patient = Patient.new({:id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
+      patient = Patient.new({:id => 1, :id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
       patient.save()
       expect(Patient.all()).to(eq([patient]))
     end
@@ -45,17 +45,17 @@ describe(Patient) do
 
   describe("#==") do
     it("is the same patient if it has the same name") do
-      patient1 = Patient.new({:name => "Patient 0", :id_doctor => 1,:birthdate => "1890-09-03"})
-      patient2 = Patient.new({:name => "Patient 0", :id_doctor => 1,:birthdate => "1890-09-03"})
+      patient1 = Patient.new({:name => "Patient 0", :id => 1, :id_doctor => 1,:birthdate => "1890-09-03"})
+      patient2 = Patient.new({:name => "Patient 0", :id => 1, :id_doctor => 1,:birthdate => "1890-09-03"})
       expect(patient1).to(eq(patient2))
     end
   end
 
   describe(".sort") do
     it("returns a patient list ordered alphabetically") do
-      test_patient = Patient.new({:id_doctor => 1, :name => "Steve Jobs",:birthdate => "1890-09-03"})
+      test_patient = Patient.new({:id => 1, :id_doctor => 1, :name => "Steve Jobs",:birthdate => "1890-09-03"})
       test_patient.save()
-      test_patient2 = Patient.new({:id_doctor => 2, :name => "Andy Turtle",:birthdate => "1890-09-03"})
+      test_patient2 = Patient.new({:id => 1, :id_doctor => 2, :name => "Andy Turtle",:birthdate => "1890-09-03"})
       test_patient2.save()
       expect(Patient.sort).to(eq([test_patient2,test_patient]))
     end
@@ -63,7 +63,7 @@ describe(Patient) do
 
   # describe("#tasks") do
   #   it("returns an array of tasks for that patient") do
-  #     test_patient = Patient.new({:name => "Patient 0", :id_doctor => 1})
+  #     test_patient = Patient.new({:name => "Patient 0", :id => 1, :id_doctor => 1})
   #     test_patient.save()
   #     test_task = Task.new({:description => "Learn SQL", :patient_id_doctor => test_patient.id_doctor(), :deadline => "2017-09-05 00:00:00"})
   #     test_task.save()

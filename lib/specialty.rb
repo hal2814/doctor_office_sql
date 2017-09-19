@@ -22,8 +22,10 @@ class Specialty
     # @id = result.first().fetch("id").to_i()
   end
 
+
+  #Needed to compare two objects for testing
   def ==(another_special)
-    (self.special==another_special.special).&(self.id==another_special.id)
+    (self.special==another_special.special).&  (self.id==another_special.id)
   end
 
   def self.find(id)

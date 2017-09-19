@@ -1,0 +1,23 @@
+<h1>Find a specialist</h1>
+
+<% if @specialty.any?() %>
+  <h3>Here are your lists:</h3>
+
+  <ul>
+    <% @specialty.each() do |s| %>
+      <li><a href="/<%= s.id()%>"><%= s.name() %></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+    <p>There are no lists yet!</p>
+
+<% end %>
+
+<h3>Add a task to <%= @specialty.name() %> </h3>
+
+<form action="/" method="post">
+  <input id="special" name="special" type="hidden" value="<%= @specialty.id() %>">
+  <button type="submit">Add specialty</button>
+</form>

@@ -2,7 +2,7 @@ class Patient
   attr_reader(:id,:name,:birthdate,:id_doctor)
 
   def initialize(attributes)
-    # @id = attributes.fetch(:id)
+    @id = attributes.fetch(:id)
     @name = attributes.fetch(:name)
     @birthdate = attributes.fetch(:birthdate)
     @id_doctor = attributes.fetch(:id_doctor)
@@ -15,7 +15,8 @@ class Patient
       name = patient.fetch("name")
       birthdate = patient.fetch("birthdate")
       id_doctor = patient.fetch("id_doctor").to_i
-      patients.push(Patient.new({:name => name,:birthdate =>birthdate, :id_doctor => id_doctor }))
+      id = patient.fetch("id").to_i
+      patients.push(Patient.new({:id => id,:name => name,:birthdate =>birthdate, :id_doctor => id_doctor }))
     end
     patients
   end
@@ -31,7 +32,8 @@ class Patient
       name = patient.fetch("name")
       id_doctor = patient.fetch("id_doctor").to_i() # The information comes out of the database as a string.
       birthdate = patient.fetch("birthdate")
-      patients.push(Patient.new({:name => name,:birthdate =>birthdate, :id_doctor => id_doctor }))
+      id = patient.fetch("id")
+      patients.push(Patient.new({:id => id,:name => name,:birthdate =>birthdate, :id_doctor => id_doctor }))
     end
     patients
   end

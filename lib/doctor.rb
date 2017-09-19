@@ -1,7 +1,8 @@
 class Doctor
-  attr_reader(:name,:id_specialties)
+  attr_reader(:id,:name,:id_specialties)
 
   def initialize(attributes)
+    @id = attributes.fetch(:id)
     @name = attributes.fetch(:name)
     @id_specialties = attributes.fetch(:id_specialties)
   end
@@ -12,7 +13,8 @@ class Doctor
     returned_doctors.each() do |doctor|
       name = doctor.fetch("name")
       id_specialties = doctor.fetch("id_specialties").to_i
-      doctors.push(Doctor.new({:id_specialties => id_specialties, :name => name}))
+      id = doctor.fetch("id").to_i
+      doctors.push(Doctor.new({:id => id,:id_specialties => id_specialties, :name => name}))
     end
     doctors
   end

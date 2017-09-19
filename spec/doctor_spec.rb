@@ -14,14 +14,14 @@ describe(Doctor) do
 
   describe("#name") do
     it("tells you its name") do
-      doctor = Doctor.new({:name => "Doctor Doom", :id_specialties => 1})
+      doctor = Doctor.new({:id => 1, :name => "Doctor Doom", :id_specialties => 1})
       expect(doctor.name()).to(eq("Doctor Doom"))
     end
   end
 
   describe("#id_specialties") do
     it("sets its ID when you save it") do
-      doctor = Doctor.new({:name => "Doctor Doom", :id_specialties => 1})
+      doctor = Doctor.new({:id => 1, :name => "Doctor Doom", :id_specialties => 1})
       doctor.save()
       expect(doctor.id_specialties()).to(be_an_instance_of(Fixnum))
     end
@@ -29,7 +29,7 @@ describe(Doctor) do
 
   describe("#save") do
     it("lets you save doctors to the database") do
-      doctor = Doctor.new({:name => "Doctor Doom", :id_specialties => 1})
+      doctor = Doctor.new({:id => 1, :name => "Doctor Doom", :id_specialties => 1})
       doctor.save()
       expect(Doctor.all()).to(eq([doctor]))
     end
@@ -37,17 +37,17 @@ describe(Doctor) do
 
   describe("#==") do
     it("is the same doctor if it has the same name") do
-      doctor1 = Doctor.new({:name => "Doctor Doom", :id_specialties => 1})
-      doctor2 = Doctor.new({:name => "Doctor Doom", :id_specialties => 1})
+      doctor1 = Doctor.new({:id => 1, :name => "Doctor Doom", :id_specialties => 1})
+      doctor2 = Doctor.new({:id => 1, :name => "Doctor Doom", :id_specialties => 1})
       expect(doctor1).to(eq(doctor2))
     end
   end
 
   describe(".find") do
     it("returns a doctor by its ID") do
-      test_doctor = Doctor.new({:name => "Doctor Doom", :id_specialties => 1})
+      test_doctor = Doctor.new({:id => 1, :name => "Doctor Doom", :id_specialties => 1})
       test_doctor.save()
-      test_doctor2 = Doctor.new({:name => "Home stuff", :id_specialties => 2})
+      test_doctor2 = Doctor.new({:id => 2, :name => "Home stuff", :id_specialties => 2})
       test_doctor2.save()
       expect(Doctor.find(test_doctor2.id_specialties())).to(eq(test_doctor2))
     end
@@ -55,7 +55,7 @@ describe(Doctor) do
 
   # describe("#tasks") do
   #   it("returns an array of tasks for that doctor") do
-  #     test_doctor = Doctor.new({:name => "Doctor Doom", :id_specialties => 1})
+  #     test_doctor = Doctor.new({:id => 1, :name => "Doctor Doom", :id_specialties => 1})
   #     test_doctor.save()
   #     test_task = Task.new({:description => "Learn SQL", :doctor_id_specialties => test_doctor.id_specialties(), :deadline => "2017-09-05 00:00:00"})
   #     test_task.save()
