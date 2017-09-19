@@ -29,7 +29,7 @@ class Doctor
   def self.find(id)
     found_doctor = nil
     Doctor.all().each() do |doctor|
-      if doctor.id().==(id)
+      if doctor.id_specialties().==(id)
         found_doctor = doctor
       end
     end

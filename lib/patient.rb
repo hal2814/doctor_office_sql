@@ -11,7 +11,7 @@ class Patient
   def self.all
     returned_patients = DB.exec("SELECT * FROM patients;")
     patients = []
-    returned_patients.each() do |list|
+    returned_patients.each() do |patient|
       name = patient.fetch("name")
       birthdate = patient.fetch("birthdate")
       id_doctor = patient.fetch("id_doctor").to_i
@@ -21,7 +21,7 @@ class Patient
   end
 
   def save
-    DB.exec("INSERT INTO tasks (description, list_id, deadline) VALUES ('#{@name}', '#{@id_doctor}', '#{@birthdate};')")
+    DB.exec("INSERT INTO patients (name, id_doctor, birthdate) VALUES ('#{@name}', '#{@id_doctor}', '#{@birthdate};')")
   end
 
   def self.sort
@@ -36,9 +36,9 @@ class Patient
     patients
   end
 
-  # def ==(another_patient)
-  #   (self.name.==another_list.name).&(self.id.==another_list.id)
-  # end
+  def ==(another_patient)
+    (self.name==another_patient.name).&(self.id_doctor==another_patient.id_doctor).&(self.birthdate==another_patient.birthdate)
+  end
 
   # def self.find(id)
   #   found_patient = nil

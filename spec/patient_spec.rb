@@ -31,7 +31,7 @@ describe(Patient) do
     it("sets its birthdate when you save it") do
       patient = Patient.new({:id_doctor => 1, :name => "Patient 0",:birthdate => "1890-09-03"})
       patient.save()
-      expect(patient.birthdate()).to(be_an_instance_of(Fixnum))
+      expect(patient.birthdate()).to(eq("1890-09-03"))
     end
   end
 
@@ -43,13 +43,13 @@ describe(Patient) do
     end
   end
 
-  # describe("#==") do
-  #   it("is the same patient if it has the same name") do
-  #     patient1 = Patient.new({:name => "Patient 0", :id_doctor => 1})
-  #     patient2 = Patient.new({:name => "Patient 0", :id_doctor => 1})
-  #     expect(patient1).to(eq(patient2))
-  #   end
-  # end
+  describe("#==") do
+    it("is the same patient if it has the same name") do
+      patient1 = Patient.new({:name => "Patient 0", :id_doctor => 1,:birthdate => "1890-09-03"})
+      patient2 = Patient.new({:name => "Patient 0", :id_doctor => 1,:birthdate => "1890-09-03"})
+      expect(patient1).to(eq(patient2))
+    end
+  end
 
   describe(".sort") do
     it("returns a patient list ordered alphabetically") do

@@ -12,49 +12,49 @@ describe(Specialty) do
     end
   end
 
-  describe("#specialty") do
-    it("tells you its specialty") do
-      specialty = Specialty.new({:specialty => "Primary care", :id => 1})
-      expect(specialty.specialty()).to(eq("Primary care"))
+  describe("#special") do
+    it("tells you its special") do
+      special = Specialty.new({:special => "Primary care", :id => 1})
+      expect(special.special()).to(eq("Primary care"))
     end
   end
 
   describe("#id") do
     it("sets its ID when you save it") do
-      specialty = Specialty.new({:specialty => "Primary care", :id => 1})
-      specialty.save()
-      expect(specialty.id()).to(be_an_instance_of(Fixnum))
+      special = Specialty.new({:special => "Primary care", :id => 1})
+      special.save()
+      expect(special.id()).to(be_an_instance_of(Fixnum))
     end
   end
 
   describe("#save") do
     it("lets you save specialties to the database") do
-      specialty = Specialty.new({:specialty => "Primary care", :id => 1})
-      specialty.save()
-      expect(Specialty.all()).to(eq([specialty]))
+      special = Specialty.new({:special => "Primary care", :id => 1})
+      special.save()
+      expect(Specialty.all()).to(eq([special]))
     end
   end
 
-  # describe("#==") do
-  #   it("is the same specialty if it has the same speciality") do
-  #     specialty1 = Specialty.new({:speciality => "Primary care", :id => 1})
-  #     specialty2 = Specialty.new({:speciality => "Primary care", :id => 1})
-  #     expect(specialty1).to(eq(specialty2))
-  #   end
-  # end
+  describe("#==") do
+    it("checks if it is the same object") do
+      special1 = Specialty.new({:special => "Primary care", :id => 1})
+      special2 = Specialty.new({:special => "Primary care", :id => 1})
+      expect(special1).to(eq(special2))
+    end
+  end
 
   describe(".find") do
-    it("returns a specialty by its ID") do
-      test_specialty = Specialty.new({:specialty => "Primary care", :id => 1})
-      test_specialty.save()
-      test_specialty2 = Specialty.new({:specialty => "Neurology", :id => 2})
-      test_specialty2.save()
-      expect(Specialty.find(test_specialty2.id())).to(eq(test_specialty2))
+    it("returns a special by its ID") do
+      test_special = Specialty.new({:special => "Primary care", :id => 1})
+      test_special.save()
+      test_special2 = Specialty.new({:special => "Neurology", :id => 2})
+      test_special2.save()
+      expect(Specialty.find(test_special2.id())).to(eq(test_special2))
     end
   end
 
   # describe("#tasks") do
-  #   it("returns an array of tasks for that specialty") do
+  #   it("returns an array of tasks for that special") do
   #     test_doctor = Specialty.new({:speciality => "Primary care", :id => 1})
   #     test_doctor.save()
   #     test_task = Task.new({:description => "Learn SQL", :doctor_id => test_doctor.id(), :deadline => "2017-09-05 00:00:00"})
